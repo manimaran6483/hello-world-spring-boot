@@ -23,10 +23,14 @@ pipeline {
             steps{
                 bat(/ mvn clean install/)
             }
+            post {
+                success {
+                    jacoco(execPattern: 'target/jacoco.exec')
+                }
+            }
         }
         stage('Archive Artifacts'){
             steps{
-            	junit 'target/site/jacoco/*.xml'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, onlyIfSuccessful: true
             }
         }
