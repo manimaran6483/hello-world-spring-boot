@@ -26,6 +26,7 @@ pipeline {
         }
         stage('Archive Artifacts'){
             steps{
+            	junit 'target/site/jacoco/*.xml'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, onlyIfSuccessful: true
             }
         }
